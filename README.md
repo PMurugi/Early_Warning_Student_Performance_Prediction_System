@@ -1,4 +1,4 @@
-# Student Early Warning Performance Prediction System
+# Early Warning Student Performance Prediction System
 
 An end-to-end machine learning web application built with Streamlit and XGBoost to predict student performance and identify academic risk early in the semester.
 
