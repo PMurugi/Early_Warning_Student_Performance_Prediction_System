@@ -1,3 +1,4 @@
+import os
 import streamlit as st
 import pandas as pd
 from xgboost import XGBClassifier
@@ -10,11 +11,18 @@ st.title("Academic Advisor Dashboard: Early-Warning System")
 st.markdown("Select a student's profile to predict their academic risk based on their first 4 weeks of engagement.")
 
 # 2. Loading the AI Model and the Student Data
+# Get directory of current script (Final_Dashboard_App folder)
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
 @st.cache_resource
 def load_data():
     model = XGBClassifier()
-    model.load_model("xgboost_student_model.json")
-    students = pd.read_csv("test_students.csv")
+    # Use BASE_DIR to build full path to model and dataset
+    model_path = os.path.join(BASE_DIR, "xgboost_student_model.json")
+    data_path = os.path.join(BASE_DIR, "test_students.csv")
+    
+    model.load_model(model_path)
+    students = pd.read_csv(data_path)
     return model, students
 
 model, students = load_data()
