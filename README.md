@@ -1,5 +1,7 @@
 # Early Warning Student Performance Prediction System
 
+[Click here to launch the Live Dashboard](https://earlywarningstudentperformancepredictionsystem.streamlit.app/)
+
 An end-to-end machine learning web application built with Streamlit and XGBoost to predict student performance and identify academic risk early in the semester.
 
 ## Dataset Attribution
