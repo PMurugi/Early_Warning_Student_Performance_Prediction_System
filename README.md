@@ -35,6 +35,43 @@ The system treats **Fail/Withdrawn** as the academic-risk class and predicts whe
 4. **View SHAP Explanation:** If the student is identified as high risk, the dashboard displays a SHAP waterfall chart showing the features that contributed to the prediction.
 5. **Review Intervention:** Use the explanation to understand which factors may require attention and guide an appropriate academic intervention.
 
+## Results
+
+Models were compared on a 20% hold-out test set (6,519 students), using only each student's first four weeks of activity:
+
+| Model | Accuracy |
+|---|---|
+| Logistic Regression (baseline) | 72.71% |
+| XGBoost (used in the dashboard) | 73.68% |
+| Random Forest | 74.00% |
+| Voting Ensemble (RF + XGBoost) | 74.37% |
+
+Accuracy is similar across models, which suggests the four-week window limits performance more than the choice of algorithm.
+
+### XGBoost detail
+
+| Class | Precision | Recall | F1-score |
+|---|---|---|---|
+| Low Risk | 0.70 | 0.77 | 0.73 |
+| High Risk | 0.78 | 0.71 | 0.74 |
+
+For the High Risk class, the model flagged about 71% of students who actually failed or withdrew, and about 78% of the students it flagged were genuinely at risk.
+
+## Fairness Check
+
+False positive rates were compared across genders:
+
+- Female students: 21.33%
+- Male students: 24.04%
+- Difference: 2.71 percentage points
+
+## Future Work
+
+- Retrain on local university data, since the model was trained on the UK-based OULAD dataset.
+- Extend beyond the first four weeks to see how much accuracy improves as more data arrives.
+- Extend the fairness check beyond gender to other student groups.
+- Tune the decision threshold to catch more at-risk students (recall is currently 71%).
+  
 ## Tech Stack
 
 * **Dashboard:** Streamlit
